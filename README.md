@@ -1,0 +1,4 @@
+nimloadhelper
+=============
+
+nodejs image loader
