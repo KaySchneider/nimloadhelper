@@ -29,7 +29,7 @@ fs.readFile(loadFile,{
 	lines.forEach(function(item) {
 		loadImage(item);
 	});
-	process.exit(1);
+
 });
 
 
@@ -37,7 +37,7 @@ var loadImage  = function(urlData) {
         var hostInfo = url.parse(urlData);
 	if(hostInfo.path === null) {
 		console.log("error",urlData);
-		process.exit(-1);
+		return false;	
 	}
 	var name = hostInfo.path.split('/');
 	var options  = {
@@ -46,18 +46,29 @@ var loadImage  = function(urlData) {
 		port:80
 	};
 	console.log('Loading Image Url:',hostInfo.href);
-	
+		
 
 	//load the image with wget or direct in nodejs ?
-	var request = http.get(options, function(res) {
+	 http.get(options, function(res) {
+		
 		var imagedata = '';
 		res.setEncoding('binary');
+		res.on('error', function (err) {
+			console.log(err);
+			throw err;
+		});
 		res.on('data', function(chunk) {
 			imagedata +=chunk;
 		});
 
 		res.on('end', function () {
-			fs.writeFile( './' + downloadFolder + '/' +  name[name.length-1]);
+			fs.writeFile( './' + downloadFolder + '/' +  name[name.length-1], imagedata, 'binary', function (err) {
+				if(err) {
+				  console.log("write file");
+				  throw err;
+				}	
+				sys.puts('file:' + name);
+			});
 		});
 	});
 	
