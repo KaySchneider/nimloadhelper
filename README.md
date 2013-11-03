@@ -20,6 +20,7 @@ node loader.js
 
 
 example cli output:
+```
 Loading Image Url: http://icons.wxug.com/i/c/k/chanceflurries.gif
 Loading Image Url: http://icons.wxug.com/i/c/k/chancerain.gif
 Loading Image Url: http://icons.wxug.com/i/c/k/chancesleet.gif
@@ -65,4 +66,4 @@ file:,i,c,k,partlycloudy.gif
 file:,i,c,k,partlysunny.gif
 file:,i,c,k,sleet.gif
 file:,i,c,k,sleet.gif
-
+```
